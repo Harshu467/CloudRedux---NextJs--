@@ -1,0 +1,122 @@
+/* styles/footer.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.footer {
+  background-color: #24262b;
+  padding: 4rem 0;
+}
+
+.footer-col {
+  width: 25%;
+  padding: 0 1.5rem;
+}
+
+.footer-col h4 {
+  @apply text-xl font-semibold text-white capitalize mb-9 relative;
+}
+
+.footer-col h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.625rem;
+  background-color: #e5e7eb;
+  height: 0.125rem;
+  box-sizing: border-box;
+  width: 3.125rem;
+}
+
+.footer-col ul li:not(:last-child) {
+  @apply mb-4;
+}
+
+.footer-col ul li a {
+  @apply text-white text-base font-light;
+}
+
+.footer-col ul li a:hover {
+  @apply text-white pl-2;
+}
+
+.footer-col .social-links a {
+  @apply inline-block h-10 w-10 bg-white bg-opacity-20 mr-4 text-center leading-10 rounded-full text-white transition-colors duration-500;
+}
+
+.footer-col .social-links a:hover {
+  @apply text-black bg-white bg-opacity-100;
+}
+
+.wrap {
+  @apply flex justify-evenly items-center;
+  overflow: hidden;
+}
+
+.box img {
+  @apply h-full w-full;
+}
+
+@media screen and (max-width: 476px) {
+  .footer-col {
+    @apply w-full;
+  }
+
+  .wrap {
+    @apply flex-col items-center;
+    height: min-content;
+  }
+
+  .box img {
+    @apply h-32;
+  }
+
+  .wrap .content-box {
+    @apply flex-col;
+    row-gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 476px) and (max-width: 768px) {
+  .footer-col {
+    @apply w-full;
+  }
+
+  .wrap {
+    @apply flex-col items-center;
+    height: min-content;
+  }
+
+  .box img {
+    @apply w-72;
+  }
+
+  .wrap .content-box {
+    @apply flex-row;
+  }
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background: white;
+  color: black;
+}
