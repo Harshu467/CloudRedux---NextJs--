@@ -27,6 +27,8 @@ exports.createEvent = async (req,res,next) => {
 
 }
 
+
+
 exports.getAllVirtualEvents = async (req, res, next) => {
     try {
       const virtualEvents = await VirtualEvent.find();

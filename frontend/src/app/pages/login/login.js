@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { toast,Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useUserContext } from '../../../../context/userContext';
-export default function login() {
+const login = () => {
  
   const [data,setdata] = useState({
     email:"",
@@ -138,6 +138,7 @@ export default function login() {
               <Button
                 type="submit"
                 fullWidth
+                style={{backgroundColor: 'blue', color: 'white'}}
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
@@ -162,3 +163,5 @@ export default function login() {
       </>
   );
 }
+
+export default login;

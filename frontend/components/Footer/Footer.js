@@ -11,13 +11,13 @@ const Footer = () => {
                 <h4>Quick Links</h4>
                 <ul>
                   <li>
-                    <a href="/" aria-label="Go to home page">Home</a>
+                    <a href="#" aria-label="Go to home page">Home</a>
                   </li>
                   <li>
-                    <a href="/dashboard" aria-label="Go to recommendation page">Dashboard</a>
+                    <a href="#" aria-label="Go to recommendation page">Dashboard</a>
                   </li>
                   <li>
-                    <a href="/profile" aria-label="Go to your profile page">Profile</a>
+                    <a href="#" aria-label="Go to your profile page">Profile</a>
                   </li>
                 </ul>
               </div>
