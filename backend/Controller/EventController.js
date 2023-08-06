@@ -1,7 +1,6 @@
 const {success} = require('../Helper/Response');
 const mongoose = require('mongoose');
 const User = require('../Model/User');
-const Event = require('../Model/Event');
 const VirtualEvent = require('../Model/Event');
 
 exports.createEvent = async (req,res,next) => {
@@ -106,7 +105,7 @@ exports.eventsUpdate = async (req, res, next) => {
     {
       return res.status(400).json({error:true,message:"All fields are required"});
     }
-    const event = await Event.findById(eventId);
+    const event = await VirtualEvent.findById(eventId);
     if(!event)
     {
       return res.status(400).json({error:true,message:"Event does not exist"});
@@ -114,7 +113,7 @@ exports.eventsUpdate = async (req, res, next) => {
     if (userId !== event.organizer.toString()) {
       return res.status(400).json({ error: true, message: "You are not authorized to update this event" });
     }
-    await Event.updateOne({_id:req.params.eventId},
+    await VirtualEvent.updateOne({_id:req.params.eventId},
       {
         $set:
         {
@@ -133,3 +132,25 @@ exports.eventsUpdate = async (req, res, next) => {
     res.status(400).json({error:true,message:error.message});
   }
 }
+exports.attend = (async (req, res, next) => {
+  console.log('attend');
+  try {
+    const { eventId, userId } = req.params;
+
+    const event = await VirtualEvent.findById(eventId);
+    console.log(event);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    if (event.participants.includes(userId)) {
+      return res.status(400).json({ message: 'You are already attending this event' });
+    }
+    event.participants.push(userId);
+    await event.save();
+    res.json({ success: true, message: 'You have successfully attended the event' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred' });
+  }
+});
