@@ -1,6 +1,7 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import updateEvent from '../api/apiServices'
+import attendEvent from '../api/apiEvent';
 
 const UserContext = createContext();
 
@@ -40,6 +41,16 @@ export function UserProvider({ children }) {
       throw error;
     }
   };
+  const attendEvents = async (eventId, userId) => {
+    try {
+      const response = await attendEvent(eventId, userId);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error attending event:', error);
+      throw error;
+    }
+  };
   const userSave = (id) => {
     setId(id);
     localStorage.setItem('userId', JSON.stringify(id));
@@ -63,6 +74,7 @@ export function UserProvider({ children }) {
       console.error('Error fetching virtual events:', error);
     }
   }
+  
 
   const addEvent = (event) => {
     setEvents((prevEvents) => [...prevEvents, event]);
@@ -76,7 +88,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ eventsSave, editEvents, user,  events, addEvent, logoutUser,fetchVirtualEvents,id,storeUser, userSave }}>
+    <UserContext.Provider value={{ eventsSave, editEvents,attendEvents, user,  events, addEvent, logoutUser,fetchVirtualEvents,id,storeUser, userSave }}>
       {children}
     </UserContext.Provider>
   );

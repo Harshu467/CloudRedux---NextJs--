@@ -17,4 +17,5 @@ export default async function updateEvent(userId, eventId, eventData) {
     console.error('Error updating event:', error);
     throw error;
   }
-}
+};
+

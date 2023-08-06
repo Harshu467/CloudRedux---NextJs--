@@ -149,6 +149,7 @@ exports.attend = (async (req, res, next) => {
     event.participants.push(userId);
     await event.save();
     res.json({ success: true, message: 'You have successfully attended the event' });
+    console.logz(event)
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'An error occurred' });

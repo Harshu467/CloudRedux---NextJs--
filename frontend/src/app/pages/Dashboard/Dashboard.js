@@ -9,7 +9,7 @@ import { Toaster,toast } from 'react-hot-toast';
 import EditEventModal from '../../../../components/EditModel/EditEventModel'
 
 const Dashboard = () => {
-  const {user,events,fetchVirtualEvents} = useUserContext()
+  const {user,events,fetchVirtualEvents,attendEvents} = useUserContext()
   const [data,setdata] = useState({
    user:""
   })

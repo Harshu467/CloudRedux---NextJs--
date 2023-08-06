@@ -10,12 +10,24 @@ import EditEventModal from '../EditModel/EditEventModel';
 import { Toaster, toast } from 'react-hot-toast';
 
 const Cards = ({ event, onAttend, onRSVP }) => {
-  const { id, handleEdit , user} = useUserContext(); // Destructure id and handleEdit from the context
-  const [editModalOpen, setEditModalOpen] = useState(false); // State for the edit modal
-  const [editedEvent, setEditedEvent] = useState(event); // State for the edited event data
+  const { id, handleEdit, user, attendEvents, fetchVirtualEvents } = useUserContext();
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editedEvent, setEditedEvent] = useState(event);
 
-  const handleAttendClick = () => {
-    onAttend(event);
+  const handleAttendClick = async () => {
+    if (!user) {
+      toast.error('Please log in to attend an event');
+      return;
+    }
+
+    try {
+      await attendEvents(event?._id, user?.id);
+      fetchVirtualEvents();
+      toast.success('You have successfully attended the event');
+    } catch (error) {
+      console.error('Error attending event:', error);
+      toast.error('Error attending event');
+    }
   };
 
   const handleEditClick = () => {
@@ -31,9 +43,8 @@ const Cards = ({ event, onAttend, onRSVP }) => {
   };
 
   const handleEventUpdate = async () => {
-    if(!user)
-    {
-      toast.error("You Do Not Have Access to Edit , Please Login !")
+    if (!user) {
+      toast.error('Please log in to edit the event');
       return;
     }
 
@@ -46,11 +57,12 @@ const Cards = ({ event, onAttend, onRSVP }) => {
       console.error('Error updating event:', error);
     }
   };
-  const isAttending = event.participants.includes(user ? user._id : null);
-  const isRSVPed = event.participants.includes(user ? user._id : null);
+
+  const isAttending = event.participants.includes(user ? user.id : null);
+  const isRSVPed = event.participants.includes(user ? user.id : null);
 
   return (
-    <Card sx={{ maxWidth: 280, maxHeight:300 }}>
+    <Card sx={{ maxWidth: 280, maxHeight: 300 }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {event.title}
@@ -73,12 +85,15 @@ const Cards = ({ event, onAttend, onRSVP }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        {/* Render RSVP or Attend button based on event participation */}
         {isAttending ? (
           isRSVPed ? (
-            <Typography variant="body2" className="text-green-500 font-bold">
-              You have RSVPed to this event.
-            </Typography>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: 'red', color: 'white' }}
+              disabled
+            >
+              RSVPED
+            </Button>
           ) : (
             <Button
               variant="contained"
@@ -107,12 +122,9 @@ const Cards = ({ event, onAttend, onRSVP }) => {
         event={editedEvent}
         onUpdate={handleEventUpdate}
         onClose={handleModalClose}
-        onEventChange={setEditedEvent} 
+        onEventChange={setEditedEvent}
       />
-      <Toaster
-            position="top-center"
-            reverseOrder={false}
-          />
+      <Toaster position="top-center" reverseOrder={false} />
     </Card>
   );
 };

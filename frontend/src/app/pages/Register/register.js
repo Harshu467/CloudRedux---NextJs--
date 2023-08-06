@@ -177,6 +177,7 @@ export default function Register() {
               <Button
                 type="submit"
                 fullWidth
+                style={{backgroundColor:"blue",color:"white"}}
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
