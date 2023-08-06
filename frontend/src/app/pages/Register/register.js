@@ -80,9 +80,8 @@ export default function Register() {
       return;
     }
     try {
-      const result = await axios.post('http://localhost:5000/api/v1/register',data)
+      const result = await axios.post(`${process.env.BASE_URL}/register`,data)
       if (result.data.success) {
-        // dispatch(registerUser(result.data.data));
         router.replace('/login');
         toast.success(result.data.message, { duration: 5000 })
       }
