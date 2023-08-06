@@ -1,5 +1,5 @@
 import { UserProvider } from '../../context/userContext';
-import Login from '../../src/app/pages/login/login'
+import Login from '../../src/app/pages/login/Login'
 
 const LoginPage = () => {
   return (

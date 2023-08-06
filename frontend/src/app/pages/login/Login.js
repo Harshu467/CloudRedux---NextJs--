@@ -13,7 +13,8 @@ import { useState } from 'react';
 import { toast,Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useUserContext } from '../../../../context/userContext';
-const login = () => {
+
+const Login = () => {
  
   const [data,setdata] = useState({
     email:"",
@@ -162,6 +163,6 @@ const login = () => {
       </Grid>
       </>
   );
-}
+};
 
-export default login;
+export default Login;
