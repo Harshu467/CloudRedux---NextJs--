@@ -96,7 +96,7 @@ const AddEvents= () => {
 
     try {
       const newEvent = { ...formData, id: Date.now(), organizer: id };
-      const response = await axios.post(`http://localhost:5000/api/v1/createEvent/${id}`, newEvent);
+      const response = await axios.post(`${process.env.BASE_URL}/createEvent/${id}`, newEvent);
      console.log(response)
       setFormData({
         title: '',

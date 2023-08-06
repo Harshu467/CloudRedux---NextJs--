@@ -35,7 +35,7 @@ const EditEventModal = ({ event, isOpen, onClose, onUpdate }) => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/v1/eventsUpdate/${id}/${eventData._id}`,
+        `${process.env.BASE_URL}/eventsUpdate/${id}/${eventData._id}`,
         eventData,
         {
           headers: {

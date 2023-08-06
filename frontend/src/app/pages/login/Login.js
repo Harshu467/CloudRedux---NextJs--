@@ -66,7 +66,7 @@ const Login = () => {
       return;
     }
     try {
-      const result = await  axios.post('http://localhost:5000/api/v1/login',data)
+      const result = await  axios.post(`${process.env.BASE_URL}/login`,data)
       if (result.data.success) {
         localStorage.setItem('user', JSON.stringify(result.data.data));
         localStorage.setItem('userId', JSON.stringify(result.data.data.id));

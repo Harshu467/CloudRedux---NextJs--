@@ -67,7 +67,7 @@ export function UserProvider({ children }) {
   }
   const fetchVirtualEvents = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/getAllEvents');
+      const response = await fetch(`${process.env.BASE_URL}getAllEvents`);
       const data = await response.json();
       eventsSave(data.data); 
     } catch (error) {
